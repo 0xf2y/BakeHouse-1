@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label "sys-admin-mnf"
+        label "slave1"
     }
     //parameters {
       //  choice(name: 'ENV_ITI', choices: ['dev', 'test', 'prod', "release"])
