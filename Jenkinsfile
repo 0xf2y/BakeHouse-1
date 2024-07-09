@@ -11,7 +11,7 @@ pipeline {
                 script {
                     echo 'build'
                     if (params.ENV_ITI == "release") {
-                        withCredentials([usernamePassword(credentialsId: 'iti-sys-admin-mnf-docker-cred', usernameVariable: 'USERNAME_SYSADMIN', passwordVariable: 'PASSWORD_SYSADMIN')]) {
+                        withCredentials([usernamePassword(credentialsId: '7c3d240b-00a6-4ec2-a392-7ee15ccd4ce3', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sh '''
                                 docker login -u ${USERNAME_SYSADMIN} -p ${PASSWORD_SYSADMIN}
                                 docker build -t mostafaelsharkawy74/bakehouseitisysadmin:v${BUILD_NUMBER} .
