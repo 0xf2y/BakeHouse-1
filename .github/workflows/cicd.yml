@@ -41,8 +41,4 @@ jobs:
             cat Deployment/deploy.yaml.tmp | envsubst > Deployment/deploy.yaml
             rm -rf Deployment/deploy.yaml.tmp
             kubectl apply -f Deployment --kubeconfig ${{ secrets.KUBECONFIG }} -n prod
-      
-    
-  
-
     
