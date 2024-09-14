@@ -30,6 +30,7 @@ jobs:
     
     deploy:
       name: deploy to local k8s cluster
+      needs: build
       runs-on: ubuntu-latest
       environment: prod
       steps:
