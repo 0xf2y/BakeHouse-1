@@ -21,9 +21,9 @@ jobs:
           id: build-docker-image
           run: |
             ls -la 
-            docker build . -f Dockerfile -t abdulrahmanelfeki/bakehouse:v${BUILD_NUMBER}
+            docker build . -f Dockerfile -t abdulrahmanelfeki/bakehouse:v${{ steps.meta.outputs.tags }}
         - name: push the docker image
           id: push-docker-image
-          run: docker push ${{secrets.DOCKER_USERNAME}}/bakehouse:v${BUILD_NUMBER}
+          run: docker push ${{secrets.DOCKER_USERNAME}}/bakehouse:v${{ steps.meta.outputs.tags }}
 
     
