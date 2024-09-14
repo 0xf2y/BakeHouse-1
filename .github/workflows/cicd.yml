@@ -24,7 +24,25 @@ jobs:
             docker build . -f Dockerfile -t abdulrahmanelfeki/bakehouse:${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
         - name: push the docker image
           id: push-docker-image
-          run: docker push ${{secrets.DOCKER_USERNAME}}/bakehouse:${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
+          run: | 
+            docker push ${{secrets.DOCKER_USERNAME}}/bakehouse:${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}
+            echo "${{ github.run_id }}.${{ github.run_number }}.${{ github.run_attempt }}"  > ../build_num.txt
+    
+    deploy:
+      name: deploy to local k8s cluster
+      runs-on: ubuntu-latest
+      environment: prod
+      steps:
+        - uses: actions/checkout@v2
+        - name: deploy to k8s cluster
+          run: |  
+            export BUILD_NUMBER=$(cat ../build_num.txt)
+            mv Deployment/deploy.yaml Deployment/deploy.yaml.tmp
+            cat Deployment/deploy.yaml.tmp | envsubst > Deployment/deploy.yaml
+            rm -rf Deployment/deploy.yaml.tmp
+            kubectl apply -f Deployment --kubeconfig ${{ secrets.KUBECONFIG }} -n prod
+      
+    
   
 
     
