@@ -25,3 +25,5 @@ jobs:
         - name: push the docker image
           id: push-docker-image
           run: docker push ${{secrets.DOCKER_USERNAME}}/bakehouse:v${BUILD_NUMBER}
+
+    
