@@ -2,9 +2,9 @@ name: "Code scanning"
 
 on:
   push:
-    branches: [ main ]
+    branches: [ cicd-github-action ]
   pull_request:
-    branches: [ main ]
+    branches: [ cicd-github-action ]
 
 jobs:
   analyze:
